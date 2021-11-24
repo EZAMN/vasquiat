@@ -16,6 +16,9 @@ services:
         - ENV_FILE_PATH=.env
     env_file:
       - .env
+    depends_on:
+      mysql:
+        condition: service_healthy
     networks:
       - vasquiat
 
@@ -35,6 +38,10 @@ services:
     command: mysqld --sql_mode="NO_AUTO_VALUE_ON_ZERO"
     networks:
       - vasquiat
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest

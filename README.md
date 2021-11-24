@@ -2,6 +2,11 @@
 
 Microservice to handle products operations
 
+## Install 🔧
+
+```sh
+make install
+
 ## Build 🔧
 
 ```sh

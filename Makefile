@@ -1,5 +1,9 @@
 SERVER_SERVICE=server
 
+.PHONY: install
+install: ## gets inside a container
+	yarn && yarn build
+
 .PHONY: bash
 bash: ## gets inside a container
 	docker-compose exec server sh
