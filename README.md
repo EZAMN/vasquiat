@@ -15,6 +15,7 @@ make build
 ```
 
 ## start 🚀
+It might take 30 secs
 
 ```sh
 make up
