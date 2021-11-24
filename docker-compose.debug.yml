@@ -1,0 +1,7 @@
+version: "3.6"
+
+services:
+  server:
+    command: yarn dev:debug
+    ports:
+      - 9229:9229

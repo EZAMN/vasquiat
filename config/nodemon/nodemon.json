@@ -1,0 +1,5 @@
+{
+  "watch": ["src", "libs", "config"],
+  "exec": "ts-node --transpile-only --project tsconfig.server.json src/server.ts",
+  "ext": "js ts"
+}

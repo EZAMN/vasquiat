@@ -1,0 +1,49 @@
+version: "3.6"
+
+volumes:
+  yarn_cache:
+
+services:
+  server:
+    entrypoint: ./start.sh
+    volumes:
+      - .:/usr/src/app
+      - yarn_cache:/usr/local/share/.cache/yarn
+    ports:
+      - 5000:5000
+    build:
+      args:
+        - ENV_FILE_PATH=.env
+    env_file:
+      - .env
+    networks:
+      - vasquiat
+
+  mysql:
+    ports:
+      - 3308:3306
+    expose:
+      - 3308
+    image: mysql:5.7
+    volumes:
+      - ./docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=dev
+      - MYSQL_DATABASE=vasquiat
+      - MYSQL_USER=dev
+      - MYSQL_PASSWORD=dev
+    command: mysqld --sql_mode="NO_AUTO_VALUE_ON_ZERO"
+    networks:
+      - vasquiat
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 8383:80
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+    depends_on:
+      - mysql
+    networks:
+      - vasquiat

@@ -1,0 +1,108 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Openapi vasquiat test
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /products:
+    get:
+      summary: Get a list of products
+      operationId: ProductSearch
+      tags:
+        - product
+      parameters:
+        - name: category
+          in: query
+          description: A category to filter by
+          schema:
+            type: string
+        - name: minPrice
+          in: query
+          description: A minimum Price
+          schema:
+            type: number
+        - name: maxPrice
+          in: query
+          description: A max Price
+          schema:
+            type: number
+        - name: apikey
+          in: header
+          description: the api key
+          example: '1234'
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of products
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: '#/components/schemas/Product'
+  /product:
+      post:
+        tags:
+          - product
+        summary: Create a product
+        responses:
+          '200':
+            description: OK
+          '400':
+            description: Invalid request
+          '500':
+            description: Internal Server Error
+        requestBody:
+          $ref: '#/components/requestBodies/createProduct'
+components:
+  schemas:
+    Product:
+      required:
+        - id
+        - name
+        - category
+        - price
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Product uuid
+        name:
+          type: string
+          description: Product name
+        category:
+          type: string
+          description: Product category
+        price:
+          type: number
+          description: Product price
+    CreateProduct:
+      required:
+        - name
+        - category
+        - price
+      properties:
+        name:
+          type: string
+          description: Product name
+          example: Product name
+        category:
+          type: string
+          description: Product category
+          example: Product category
+        price:
+          type: number
+          description: Product price
+          example: 50.66
+  requestBodies:
+      createProduct:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProduct'
+        description: Product contents
+        required: true
+          

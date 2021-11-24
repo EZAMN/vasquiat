@@ -1,0 +1,33 @@
+version: "3.6"
+
+networks:
+  vasquiat:
+    external: false
+
+services:
+  server:
+    command: ./start.sh
+    container_name: vasquiat-backend
+    build:
+      context: .
+      dockerfile: docker/server/Dockerfile
+      args:
+        - ENV_FILE_PATH=.env
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    networks:
+      - vasquiat
+  
+  swagger:
+    build:
+      dockerfile: docker/swagger/Dockerfile
+      context: .
+    container_name: vasquiat-swagger
+    volumes:
+      - ./docs/openapi:/docs/openapi
+    ports:
+      - 5001:8080
+    networks:
+      - vasquiat
