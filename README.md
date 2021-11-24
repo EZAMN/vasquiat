@@ -6,6 +6,7 @@ Microservice to handle products operations
 
 ```sh
 make install
+```
 
 ## Build 🔧
 
