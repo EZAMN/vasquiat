@@ -35,9 +35,9 @@ If you need more commands:
 make help
 ```
 
-## Exercice 1
+## Exercise 1
 
-To run the first exercice:
+To run the first exercise:
 
 ```sh
 make import
@@ -45,12 +45,12 @@ make import
 
 You can check the results in the PHPadmin platform at localhost:8383. user: 'dev', password: 'dev'.
 
-## Exercice 2
+## Exercise 2
 
 Access the swagger platform at localhost:5001 and check the Get /products endpoint.
 You need a valid api key to execute this call, as it is authenticated, valid api keys are '1234' and '4321', they need to be set as a 'apikey' header.
 
-## Exercice 3
+## Exercise 3
 
 Access the swagger platform at localhost:5001 and check the Post /product endpoint to create a new product. 
 With the "Try it out" button, you can access the form to add new products.
